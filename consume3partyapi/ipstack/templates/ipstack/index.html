@@ -1,0 +1,90 @@
+{%extends "ipstack/base.html"%}
+
+{%block title%} IpTrack | Free IP tracker and Geolocation	{%endblock%}
+
+{%block css%}
+
+
+{%endblock%}
+
+{%block body%}
+<section>
+<div class="d-flex justify-content-center mt-5">
+	<div>
+	<h4 class="d-block mb-4">Enter Target IP address</h4>
+	<form class="form-inline" action="http://127.0.0.1:8000/" method="post">{%csrf_token%}
+		<input type="text" name="target_ip" class="form-control" placeholder="eg. 134.201.250.155" required="true">
+		<button type="submit" class="btn btn-success px-4 py-2">Trace</button>
+	</form>
+</div>
+</div>
+</section>
+
+{%if status_code%}
+<section class="mb-5">
+	<div class="mt-5 bg-dark text-white">
+		<h4 class="text-center">Target {{data.ip}} Information</h4>
+	<table class="container table table-dark">
+    <tbody>
+      <tr>
+        <td>IP Address : </td>
+        <td>{{data.ip}}</td>
+      </tr>
+      <tr>
+        <td>Continent Name : </td>
+        <td>{{data.continent_name}}</td>
+      </tr>
+      <tr>
+        <td>Country Name : </td>
+        <td>{{data.country_name}}</td>
+      </tr>
+      <tr>
+        <td>County Code : </td>
+        <td>{{data.country_code}}</td>
+      </tr>
+      <tr>
+        <td>Region Name : </td>
+        <td>{{data.region_name}}</td>
+      </tr>
+      <tr>
+        <td>Country flag : </td>
+        <td><img src="{{data.location.country_flag}}" width="50px" height="30px"></td>
+      </tr>
+      <tr>
+        <td>Language Name : </td>
+        <td>{{data.location.languages.0.name}}</td>
+      </tr>
+      <tr>
+        <td>Native Language Name : </td>
+        <td>{{data.location.languages.0.native}}</td>
+      </tr>
+        <tr>
+        <td>Calling code : </td>
+        <td>+{{data.location.calling_code}}</td>
+      </tr>
+      <tr>
+        <td>City : </td>
+        <td>{{data.city}}</td>
+      </tr>
+      <tr>
+      	<tr>
+        <td>Capital : </td>
+        <td>{{data.location.capital}}</td>
+      </tr>
+        <td>Zip  : </td>
+        <td>{{data.zip}}</td>
+      </tr>
+      <tr>
+        <td>Latitude : </td>
+        <td>{{data.latitude}}</td>
+      </tr>
+      <tr>
+        <td>Longitude : </td>
+        <td>{{data.longitude}}</td>
+      </tr>
+    </tbody>
+  </table>
+	</div>
+</section>
+{%endif%}
+{%endblock%}
